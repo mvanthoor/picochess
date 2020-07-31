@@ -63,4 +63,7 @@ docs/_build/
 
 # Config file
 picochess.ini
+books.ini
+engines.ini
+voices.ini
 picochess.uci
