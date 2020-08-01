@@ -1,172 +1,311 @@
-### ===================================
-### = picochess.ini.example v0.9[m-z] =
-### ===================================
-### Example and description how to configure PicoChess
-### To use this file, simply copy this file to picochess.ini and edit the appropriate settings
-### When you want to activate a flag/line, please remove the "# " infront of it f.e. "# book = ..." becomes "book = ..."
-### Its important you keep this file valid (like here, no leading spaces), otherwise picochess won't work correctly.
+### ==================================================
+### = picochess.ini.example, for versions since 0.9m =
+### ==================================================
 
-### From v0.71 on some picochess.ini values are overridden when you change their values using the menu system
-### Perhaps its a good idea to keep a copy of "picochess.ini" before you are going live with your picochess ;-)
-### The section "DGT", "remote-engine", "Mail", and some "Picochess" flags are examples which can only be changed here
+### Example and description on how to configure PicoChess. To use this file,
+### simply copy this file to picochess.ini and edit the appropriate settings.
+### When you want to activate a flag/line, please remove the "# " in front of
+### it f.e. "# book = ..." becomes "book = ..." Its important you keep this
+### file valid (like here, no leading spaces), otherwise picochess won't work
+### correctly.
 
-### Lines that start with 3x# are general comments
-### Lines that start with 2x# explain the option of the next line that starts with one # 
-### Lines that start with 1x# are option lines, delete the # to use the option
+### From v0.71 on some picochess.ini values are overridden when you change
+### their values using the menu system Perhaps its a good idea to keep a copy
+### of "picochess.ini" before you are going live with your picochess ;-) The
+### section "DGT", "remote-engine", "Mail", and some "Picochess" flags are
+### examples which can only be changed here in picochess.ini.
+
+### Explanation of line starting comments:
+
+### 3x#: These are general comments.
+### 2x#: Explanation of the next line starting with #.
+### 1x#: These are option lines, delete the # to use the option.
+
+### ======================================================================
 
 ### =======================
-### = DGT related options =
+### = DGT-related options =
 ### =======================
-## disable-revelation-leds turns OFF the leds on the Revelation II board. If so, please uncomment the next line
+
+## disable-revelation-leds turns OFF the leds on the Revelation II board.
+## If so, please uncomment the next line.
+
 # disable-revelation-leds = True
-## beep-some-level changes the occurrence of beeps. Minimum value is 0 (no beeps), maximum is 15 (all beeps).
-## Please keep in mind: values 0 and 15 making no sense (but allowed) since they are the same as "never" & "always"
-## inside the clock menu you can choose between "always", "never" and "some". The value you give inside here, is
-## the value of "some". Each part of beeps has a special number and you have to add them to get the beep-some-level
-## CONFIG = 1 Takeback, GameEnd, NewGame, ComputerMove and SetPieces
-## BUTTON = 2 All Events coming from button press
-## MAP = 4    All Events coming from Queen placing at start pos (line3-6)
-## OKAY = 8   All Events from "ok" (confirm) messages
-## For example to beep on "ok messages" and "button press" beep-some-level is: 8(okay) + 2(button) = 10
+
+## beep-some-level changes the occurrence of beeps. Minimum value is 0 (no
+## beeps), maximum is 15 (all beeps). Please keep in mind: values 0 and 15
+## making no sense (but allowed) since they are the same as "never" & "always"
+## inside the clock menu. You can choose between "always", "never" and "some".
+## The value in picochess.ini, is the value of "some". Each part of beeps
+## has a special number and you have to add them to get the beep-some-level.
+
+## CONFIG = 1: Takeback, GameEnd, NewGame, ComputerMove and SetPieces.
+## BUTTON = 2: All Events coming from button presses.
+## MAP    = 4: All Events coming from Queen placing at start pos (line3-6).
+## OKAY   = 8: All Events from "ok" (confirm) messages.
+
+## For example to beep on "ok messages" and "button press" beep-some-level
+## is: 8 (okay) + 2 (button) = 10. The default beep-some-level is 3.
+
 # beep-some-level = 3
-## Specify the serial port your dgt-board is connected to.
-## If you dont give a parameter picochess tries to find the board automatically (prefered usage).
+
+## Specify the serial port your dgt-board is connected to. If you dont give a
+## parameter picochess tries to find the board automatically (prefered usage).
+
 # dgt-port = /dev/ttyACM0
-## Instead of connecting to a dgt board, you can also start picochess with a command line.
-## If so, please uncomment the next line
+
+## Instead of connecting to a dgt board, you can also start picochess with a
+## command line. If so, please uncomment the next line
+
 # enable-console = True
-### Handle with care! Only activate this if you have a DGT Pi clock connected. So be careful!
-### Also if you activate it but have non-DGT hardware connected (@raspberryPi) you might harm your hardware.
-## If you have a new DGT Pi clock please uncomment the next line.
+
+## Handle with care! Only activate this if you have a DGT Pi clock connected.
+## So be careful! Also if you activate it but have non-DGT hardware connected
+## you might harm your hardware. If you have a new DGT Pi clock please
+## uncomment the next line.
+
 # dgtpi = True
-### You can reduce the dgtboard piece recognition by a factor from 0 to 9. Please only use this, if you suffer from
-### sliding problems (like multi voices during you slide your pieces for example moving Bf1-b5 hear Be2,d3,c4 then b5).
+
+## You can reduce the dgtboard piece recognition by a factor from 0 to 9.
+## Please only use this, if you suffer from sliding problems (like multi
+## voices during you slide your pieces for example moving Bf1-b5 hear
+## Be2,d3,c4 then b5).
+
 # slow-slide = 0
 
-### ========================
-### = Chess engine options =
-### ========================
-### Options for the UCI-Chess engine
-## Sets the UCI engine used at startup
-## handle with care. If you setup this section wrong, picochess won't start.
-## Path to the engine relative to the 'picochess' folder (local engine - standard case)
-# engine = engines/armv7l/a-stockf
-## What level the engine should have at startup?
-## For a (correct) value please take a look at 'engines/<your_plattform>/<engine_name>.uci'
-# engine-level = Level@20
-### =========================
-### = Remote engine options =
-### =========================
-## Path to the remote engine - good chances you do not need them ;-)
-## Please make sure that you also set 'engine-remote-home' accordingly
-# engine-remote = engines/armv7l/a-stockf
-### Parameters for a remote engine (server)
-## Where is the server with the engine
-# engine-remote-server = engine.remote-domain.com
-## What user to use for connect to the remote-engine server
-# engine-remote-user = user@remote-domain.com
-## What password for the remote-engine-server
-# engine-remote-pass = your_secret_password
-## The secret server-key for the remote-engine-server
-# engine-remote-key = your_secret_key
-## The home path (where the engines live) for the remote-engine-server
-# engine-remote-home = /opt/picochess
-
-### ==========================
-### = Opening book selection =
-### ==========================
-### Sets the opening book used at startup
-## Path of an opening book relative to the 'picochess' folder
-## Defaults to book 'h', normally 'h-varied.bin', if not set or not available
-# book = books/h-varied.bin
-
-### ==================
-### = Time selection =
-### ==================
-### Sets the startup time. If you give something like "5 0" that means 5mins blitz (default value)
-## Fischer time can be set by changing this "0" (increment value) to a positive number like "3 2"
-## Fixed time can be set by just giving one number like "10" meaning 10 secs/move
-## You can also give non-standard values (like "4 6"), but then you cant change them inside the (time) menu.
-# time = 5 0
-
-### ================
-### = Mail Service =
-### ================
-### Options for sending the finished game via email service
-### PicoChess currently implements two different ways to send a finished game via email.
-### standard SMTP email or Mailgun Webservice
-### Mail general
-### if email is not set, PicoChess won't attempt to send the game at all
-## email tells PicoChess to which email address the game should be send to, it should be your email address :-)
-# email = your.mailbox@your-domain.com 
-### =======================================
-### = Section for email delivery via SMTP =
-### =======================================
-### if smtp_server is not set, PicoChess won't attempt to send the game via SMTP
-## smtp-server must contain the address of your smtp server (e.g. smtp.gmail.com)
-# smtp-server = smtp.your-mailserver.com
-## smtp-user is necessary if your smtp server requires authentication, sets your username
-# smtp-user = your_username
-## smtp-pass is necessary if your smtp server requires authentication, sets your password
-# smtp-pass = your_secret_password
-## Should PicoChess SSL-encrypt the communication with your smtp server (Port 465)?
-## Otherwise PicoChess will use the default and unencrypted SMTP Port 21.
-## Some SMTP Server require an SSL encryption (e.g. GMAIL). If so, uncomment the next line.
-# smtp-encryption = True
-## In case the SMTP Server thinks you are spamming, you must enter a valid from email here
-# smtp-from = no-reply@picochess.org
-### ==========================================
-### = Section for email delivery via Mailgun =
-### ==========================================
-### if mailgun-key is not set, PicoChess won't attempt to send the game via Mailgun
-## mailgun-key stores your Mailgun access key for Mailgun Webservice
-# mailgun-key = your Mailgun API access key
+### ===========================================================================
 
 ### =============================
 ### = PicoChess related options =
 ### =============================
-## log-file points to a file that is used to write the log information.
-## This file is created in the 'log' folder. Altogether there are 6 log files kept (rotating logs)
+
+## log-file points to a file for writing the log information. This file is
+## created in the 'log' folder. Altogether there are 6 log files kept
+## (rotating logs).
+
 # log-file = picochess.log
-## What log level should be used 
+
 ## Loglevel options are [debug, info, warning, error, critical]
+
 # log-level = debug
-## PicoChess can use human voices for announcement
-## Valid voice names are formed from 'talker/voices' folder structure. Please take a look there.
-## If you want voice output, please uncomment these settings
-## user-voice used for user moves announcement
+
+### PicoChess can use human voices for announcement. Valid voice names are
+### formed from 'talker/voices' folder structure. Please take a look there. If
+### you want voice output, please uncomment these settings.
+
+## user-voice is intended for announcing player moves.
+
 # user-voice = en:al
-## computer-voice for computer moves announcement
+
+## computer-voice is intended for announcing computer moves.
+
 # computer-voice = en:christina
-## Increase, decrease the voice speed factor. Must be between 0 to 9. Default is 2 (100%)
-## Each step is 5% starting from 90% towards 135%. Sets factor for both voices (user/computer)
+
+## Increase or decrease the voice speed factor. Must be between 0 to 9.
+## Default is 2 (100%). Each step is 5% starting from 90% towards 135%. Sets
+## the speed factor for both the user-voice and computer-voice options.
+
 # speed-voice = 2
-## Speak last computer move again when 'set pieces' displayed
+
+## Speak last computer move again when 'set pieces' is displayed.
+
 # enable-setpieces-voice = True
-## PicoChess writes pgn files at end of game. This file is created in the 'games' folder
+
+## PicoChess writes games to a file at end of a game. This file is created in
+## the 'games' folder. The name of this file can be set here.
+
 # pgn-file = games.pgn
-## If you want to have your own name in the pgn file uncomment the next line and change accordingly
+
+## If you want to have your own name in the pgn file, uncomment the next line
+## and change the option accordingly.
+
 # pgn-user = player
-## If you want your own ELO-ranking in the pgn file uncomment the next line and change accordingly
-# pgn-elo = 1987
-## Picochess will check for a new version at startup.
-## This is by default not actived. If you want this feature, please uncomment the next line
+
+## If you want your own ELO-ranking in the pgn file, uncomment the next line
+## and change the option accordingly.
+
+# pgn-elo = 1800
+
+## PicoChess can check for a new version at startup. By default, this option
+## is not activated. If you want PicoChess to automatically update, uncomment
+## the next line.
+
 # enable-update = True
-## After an update should the machine reboot automatically? If so, please uncomment the next line
+
+## Should PicoChess reboot the computer after updating? (Recommended.) If you
+## want to do so, uncomment the next line.
+
 # enable-update-reboot = True
-## The port of the webserver
+
+## This option sets the port of the PicoChess webserver.
+
 # web-server = 8080
-## PicoChess messages can be displayed in English, German, Dutch, French, Spanish or Italian.
-## You can set the language with the "language" option. Default is English.
-## en = English; de = German; nl = Dutch; fr = French; es = Spanish; it = Italian
+
+## PicoChess messages can be displayed in English, German, Dutch, French,
+## Spanish or Italian. You can set the language with the "language" option.
+## Default is English.
+
+## English = en
+## German  = de
+## Dutch   = nl
+## French  = fr
+## Spanish = es
+## Italian = it
+
 # language = en
-## When in ponder mode decides how long each info is displayed. Default is 3 secs.
-## Must be between 1 to 8 secs.
+
+## When in ponder mode, this option decides how long each info is displayed.
+## The default is 3 seconds. The value must be between 1 to 8 secs.
+
 # ponder-interval = 3
-## Displays messages with only capital letters. Doesn't work on DGTXL/Revelation II due to hardware limits.
-## If so, please uncomment the next line.
+
+## Displays messages with only capital letters. Doesn't work on DGTXL and
+## Revelation II due to hardware limitations. If you want to display messages
+## in only capital letters, please uncomment the next line.
+
 # enable-capital-letters = True
-## Should a confirmation message be displayed? If not, please active the next line
+
+## Uncomment the next line if you want to disable confirmation messages.
+
 # disable-confirm-message = True
-## Should moves be displayed in short notation (only valid for non-XL clocks)? If not, please active the next line
+
+## Should moves be displayed in short notation (only valid for non-XL clocks)?
+## If not, please active the next line.
+
 # disable-short-notation = True
+
+### ===========================================================================
+
+### ========================
+### = Chess engine options =
+### ========================
+
+## Sets the UCI engine used at startup. Handle with care. If you setup this
+## section wrong, picochess won't start. Path to the engine relative to the
+## 'picochess' folder (local engine - standard case)
+
+# engine = engines/armv7l/a-stockf
+
+## What level should the engine have at startup? For a (correct) value please
+## take a look at 'engines/<your_plattform>/<engine_name>.uci'
+
+# engine-level = Level@20
+
+### ===========================================================================
+
+### ==========================
+### = Opening book selection =
+### ==========================
+
+### Sets the opening book used at startup.
+
+## Path of an opening book relative to the 'picochess' folder. Defaults to book
+## 'h', normally 'h-varied.bin', if not set or not available.
+
+# book = books/h-varied.bin
+
+### ===========================================================================
+
+### ==================
+### = Time selection =
+### ==================
+
+## Sets the time control when starting up. If you give something like "5 0"
+## that means 5 minutes blitz with no increment. This is the default value.
+## Fischer time can be set by changing this "0" to a positive number like "5
+## 10" (5 minutes per game with 3 seconds increment). Fixed time can be set by
+## just giving one number. "10" means 10 seconds per move. You can also give
+## non-standard values (like "4 6"), but then you cant change them inside the
+## (time) menu.
+
+# time = 5 0
+
+### ===========================================================================
+
+### ========================
+### = Mail Service options =
+### ========================
+
+### PicoChess can send the finished game to you by e-mail. Two different ways
+### are implemented: standard SMTP, and the MailGun webservice. If the "email"
+### option is not set, PicoChess will not attempt to send the game.
+
+## Tell PicoChess where to send the game. (Probably your own e-mail address...)
+
+# email = your.mailbox@your-domain.com
+
+### ===========================================================================
+
+### =======================================
+### = Section for email delivery via SMTP =
+### =======================================
+
+## If the smtp_server is not set, PicoChess won't attempt to send the game via
+## SMTP. The option must contain the address of your smtp server (e.g.
+## smtp.gmail.com).
+
+# smtp-server = smtp.your-mailserver.com
+
+## smtp-user is necessary if your smtp server requires authentication.
+
+# smtp-user = your_username
+
+## smtp-pass is necessary if your smtp server requires authentication.
+
+# smtp-pass = your_secret_password
+
+## Should PicoChess SSL-encrypt the communication with your smtp server (Port
+## 465)? Otherwise PicoChess will use the default and unencrypted SMTP Port
+## 21. Some SMTP Server require an SSL encryption (e.g. GMAIL). If so,
+## uncomment the next line.
+
+# smtp-encryption = True
+
+## In case the SMTP Server thinks you are spamming, you can enter a valid
+## "from"-email address in this option.
+
+# smtp-from = no-reply@picochess.org
+
+### ===========================================================================
+
+### ==========================================
+### = Section for email delivery via Mailgun =
+### ==========================================
+
+## If the mailgun-key is not set, PicoChess won't attempt to send the game via
+## Mailgun. mailgun-key stores your Mailgun access key for the Mailgun
+## Webservice.
+
+# mailgun-key = your Mailgun API access key
+
+### ===========================================================================
+
+### =========================
+### = Remote engine options =
+### =========================
+
+## Path to the remote engine - good chances you do not need them ;-)
+## Please make sure that you also set 'engine-remote-home' accordingly.
+
+# engine-remote = engines/armv7l/a-stockf
+
+## Parameters for a remote engine (server)
+## Where is the server with the engine?
+
+# engine-remote-server = engine.remote-domain.com
+
+## Username for connecting to the remote engine server.
+
+# engine-remote-user = user@remote-domain.com
+
+## Password for the remote engine server.
+
+# engine-remote-pass = your_secret_password
+
+## Sets the secret server-key for the remote-engine-server.
+
+# engine-remote-key = your_secret_key
+
+## The home path (where the engines live) for the remote-engine-server.
+
+# engine-remote-home = /opt/picochess
