@@ -15,9 +15,8 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-# for this (picotalker) to work you need to run these commands (if you haven't done before)
-# apt-get install vorbis-tools
-# apt-get install sox
+# For picotalker to work, you need to have "sox" installed:
+# debian: sudo apt install sox
 
 import threading
 import logging
@@ -57,7 +56,7 @@ class PicoTalker(object):
         self.speed_factor = speed_factor if which('play') else 1.0  # check for "sox" package
 
     def talk(self, sounds):
-        """Speak out the sound part by using ogg123/play."""
+        """Speak out the sound part by using the 'play' command."""
         if not self.voice_path:
             logging.debug('picotalker turned off')
             return False
@@ -68,7 +67,7 @@ class PicoTalker(object):
             voice_file = vpath + '/' + part
             if Path(voice_file).is_file():
                 if self.speed_factor == 1.0:
-                    command = ['ogg123', voice_file]
+                    command = ['play', voice_file]
                 else:
                     command = ['play', voice_file, 'tempo', str(self.speed_factor)]
                 try:  # use blocking call
