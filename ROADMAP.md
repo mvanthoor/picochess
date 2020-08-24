@@ -1,6 +1,7 @@
 ## About the next version of PicoChess.
 
 July 29, 2020
+Marcel Vanthoor <mail@marcelvanthoor.nl>
 
 ## Introduction:
 
